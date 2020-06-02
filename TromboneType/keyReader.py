@@ -3,9 +3,7 @@ ser = serial.Serial()
 ser.port = 'COM4'
 ser.open()
 ser.readline()
-
-output_file = open("output.txt","w")
-
+fout = open("output.txt","w+")
 
 while True:
     try:
@@ -13,10 +11,10 @@ while True:
 
         print(ser_bytes) 
 
-        if ser_bytes[0] == 1:
-            break
+        if ser_bytes[0] == '1':
+            fout.write(ser_bytes[2])
     except:
         print("Keyboard Interrupt")
         break
 
-output_file.write(ser_bytes[2])
+fout.close()
